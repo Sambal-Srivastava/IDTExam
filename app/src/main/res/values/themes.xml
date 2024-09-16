@@ -1,9 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.IDTExam" parent="Theme.AppCompat.Light">
+    <style name="Base.Theme.IDTExam" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
-
+    <!-- Custom style for SearchView -->
+    <style name="CustomSearchViewStyle">
+        <item name="android:textColor">#000000</item> <!-- Set the text color you want -->
+        <item name="android:textColorHint">#CCCCCC</item> <!-- Set the hint text color if needed -->
+    </style>
     <style name="Theme.IDTExam" parent="Base.Theme.IDTExam" />
 </resources>

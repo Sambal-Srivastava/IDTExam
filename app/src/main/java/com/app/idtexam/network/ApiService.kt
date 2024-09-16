@@ -18,5 +18,5 @@ interface ApiService {
         @Query("appid") appid: String
     ): Response<WeatherDto.Response>*/
     @GET("users")
-    suspend fun getStates(): List<MockResponseDto>
+    suspend fun getStates(): MockResponseDto.MockResponse
 }

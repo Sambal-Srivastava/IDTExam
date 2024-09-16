@@ -13,11 +13,11 @@ class MyRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
     var useLocalData: Boolean = false
-    suspend fun getStates(): List<MockResponseDto> {
+    suspend fun getStates(): MockResponseDto.MockResponse {
         return if (useLocalData) {
             val jsonString = context.assets.open("mock_response.json").bufferedReader().use { it.readText() }
             val gson = Gson()
-            val userType = object : TypeToken<List<MockResponseDto>>() {}.type
+            val userType = object : TypeToken<MockResponseDto.MockResponse>() {}.type
             gson.fromJson(jsonString, userType)
         } else {
             apiService.getStates()

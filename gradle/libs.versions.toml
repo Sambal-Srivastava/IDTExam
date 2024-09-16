@@ -1,5 +1,6 @@
 [versions]
 agp = "8.5.2"
+design = "28.0.0"
 gson = "2.10.1"
 hiltAndroid = "2.51.1"
 kotlin = "1.9.0"
@@ -16,12 +17,15 @@ constraintlayout = "2.1.4"
 navigationFragmentKtx = "2.8.0"
 navigationUiKtx = "2.8.0"
 okhttp = "4.9.2"
+pagingRuntime = "3.3.2"
 retrofit = "2.9.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime", version.ref = "pagingRuntime" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+design = { module = "com.android.support:design", version.ref = "design" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
