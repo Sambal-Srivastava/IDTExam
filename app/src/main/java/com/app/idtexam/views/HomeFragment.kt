@@ -19,19 +19,19 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
     private val statesViewModel: StatesViewModel by viewModels()
 
-    //    private lateinit var statesViewModel: StatesViewModel
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private var statesList: List<MockResponseDto.MockData> = ArrayList()
     private var itemPosition = 0
     private lateinit var firstAdapter: StatesAdapter
     private lateinit var secondAdapter: StatesAdapter
+    private var showSateDetailsSection = false
+
+    // Shared list for selected items between both adapters
+    private val selectedItems = mutableListOf<MockResponseDto.MockData>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,15 +44,24 @@ class HomeFragment : Fragment() {
 
         binding.rvStatesCopy.layoutManager = LinearLayoutManager(requireContext())
         binding.rvStatesCopy.setHasFixedSize(true)
-
-//        statesViewModel = ViewModelProvider(this).get(StatesViewModel::class.java)
         statesViewModel.fetchStates(true)
         statesViewModel.states.observe(viewLifecycleOwner) {
             //statesList = it.data!!
-            firstAdapter = StatesAdapter(it.data!!, ::onItemClicked)
-            secondAdapter = StatesAdapter(it.data!!, ::onItemClicked)
+            firstAdapter =
+                StatesAdapter(it.data!!, selectedItems, ::onItemClicked, ::onItemDoubleClicked)
+            secondAdapter =
+                StatesAdapter(it.data!!, selectedItems, ::onItemClicked, ::onItemDoubleClicked)
             binding.rvStates.adapter = firstAdapter
             binding.rvStatesCopy.adapter = secondAdapter
+        }
+
+        if (!statesList.isEmpty()) {
+            binding.tvState.text = "State Name: \n ${statesList?.get(itemPosition)?.state}"
+            binding.tvPopulation.text =
+                "State Overall Population: \n ${statesList?.get(itemPosition)?.population.toString()}"
+            binding.tvCounties.text =
+                "Number of counties: \n ${statesList?.get(itemPosition)?.counties.toString()}"
+            binding.btnSeconScreen.isEnabled = showSateDetailsSection
         }
 
         statesViewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
@@ -86,12 +95,11 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun onItemClicked(position: Int, filteredList: MutableList<MockResponseDto.MockData>) {
-        Toast.makeText(
-            requireContext(),
-            "Clicked: ${filteredList.get(position).state}",
-            Toast.LENGTH_SHORT
-        ).show()
+    private fun onItemClicked(
+        position: Int,
+        filteredList: MutableList<MockResponseDto.MockData>,
+        showStateDetail: Boolean
+    ) {
         statesList = filteredList
         itemPosition = position
         binding.tvState.text = "State Name: \n ${filteredList.get(position).state}"
@@ -99,6 +107,16 @@ class HomeFragment : Fragment() {
             "State Overall Population: \n ${filteredList.get(position).population.toString()}"
         binding.tvCounties.text =
             "Number of counties: \n ${filteredList.get(position).counties.toString()}"
+        showSateDetailsSection = showStateDetail
+        binding.btnSeconScreen.isEnabled = showSateDetailsSection
+    }
+
+    private fun onItemDoubleClicked(
+        position: Int,
+        filteredList: MutableList<MockResponseDto.MockData>
+    ) {
+        firstAdapter.updateSelection()
+        secondAdapter.updateSelection()
     }
 
     private fun navigateToSecondScreen() {

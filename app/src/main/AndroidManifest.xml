@@ -14,8 +14,10 @@
         android:theme="@style/Theme.IDTExam">
         <activity
             android:name=".views.MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:screenOrientation="landscape"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

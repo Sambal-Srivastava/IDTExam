@@ -14,6 +14,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
+        android:background="@android:color/white"
         app:layout_constraintBottom_toTopOf="@+id/clStates"
         app:layout_constraintEnd_toStartOf="@+id/btnSeconScreen"
         app:layout_constraintHorizontal_bias="0.0"
@@ -68,6 +69,7 @@
             android:id="@+id/thirdColumn"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:background="@color/red"
             android:layout_margin="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -114,6 +116,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="5dp"
         android:layout_marginEnd="10dp"
+        android:enabled="false"
         android:text="@string/btn_second_screen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

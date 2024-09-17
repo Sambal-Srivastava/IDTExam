@@ -11,7 +11,6 @@ import com.app.idtexam.databinding.FragmentDetailsDuplicateBinding
 import com.app.idtexam.utils.Constants
 
 class DetailsDuplicateFragment : Fragment() {
-    // TODO: Rename and change types of parameters
     private var statesList: ArrayList<MockResponseDto.MockData>? = null
     private var itemPosition = 0
 
@@ -29,7 +28,6 @@ class DetailsDuplicateFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         _binding = FragmentDetailsDuplicateBinding.inflate(inflater, container, false)
         binding.tvState.text = "State Name: \n ${statesList?.get(itemPosition)?.state}"
         binding.tvPopulation.text =
